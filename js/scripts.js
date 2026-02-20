@@ -6,7 +6,6 @@ let buttons = document.querySelectorAll('#two-players, #ai-player');
 let messageContainer = document.querySelector("#message");
 let messageText = document.querySelector("#message p");
 
-// BOTÃO PARA VOLTAR PARA A PÁGINA INICIAL
 let backButton = document.getElementById("back-button");
 let startScreen = document.getElementById("start-screen");
 let gameContainer = document.getElementById("container");
@@ -35,7 +34,6 @@ for(let i = 0; i < boxes.length; i++) {
     });  
 }
 
-// BOTÃO PARA VOLTAR PARA A PÁGINA INICIAL
 backButton.addEventListener("click", () => {
     gameContainer.classList.add("hide");
     startScreen.classList.remove("hide");
@@ -62,7 +60,6 @@ function checkWinCondition(){
     let b8 = document.getElementById('block-8');
     let b9 = document.getElementById('block-9');
 
-// HORIZONTAL
     if(b1.childNodes.length > 0 && b2.childNodes.length > 0 && b3.childNodes.length > 0) {
         let b1Child = b1.childNodes[0].className;
         let b2Child = b2.childNodes[0].className;
@@ -95,8 +92,7 @@ function checkWinCondition(){
             declareWinner('O');
         }
     }
-
-// VERTICAL    
+   
     if(b1.childNodes.length > 0 && b4.childNodes.length > 0 && b7.childNodes.length > 0) {
         let b1Child = b1.childNodes[0].className;
         let b4Child = b4.childNodes[0].className;
@@ -130,7 +126,6 @@ function checkWinCondition(){
         }
     }
 
-// DIAGONAL
     if(b1.childNodes.length > 0 && b5.childNodes.length > 0 && b9.childNodes.length > 0) {
         let b1Child = b1.childNodes[0].className;
         let b5Child = b5.childNodes[0].className;
@@ -153,20 +148,17 @@ function checkWinCondition(){
         }
     }
 
-// DEU VELHA
     let counter = 0
     for(let i = 0; i < boxes.length; i++) {
         if(boxes[i].childNodes[0] != undefined) {
             counter ++;
         }
     }
-
     if(counter == 9) {
         declareWinner('deu velha');
     }
 }
 
-// LIMPA O JOGO, DECLARA O VENCEDOR E LIMPA O PLACAR 
 function declareWinner(winner){
     let scoreboardX = document.querySelector("#scoreboard-1");
     let scoreboardO = document.querySelector("#scoreboard-2");
@@ -182,42 +174,22 @@ function declareWinner(winner){
         mensagem = "DEU VELHA!";
     }
 
-// EXIBIR MENSSAGEM
     messageText.innerHTML = mensagem;
     messageContainer.classList.remove("hide");
 
-// ESCONDER A MENSSAGEM
     setTimeout(function(){
         messageContainer.classList.add("hide");
     }, 5000);
 
-// ZERAR OS JOGADORES
     player1 = 0;
     player2 = 0;
 
-// LIMPAR O JOGO
     let boxesToRemove = document.querySelectorAll(".box div");
     for(let i = 0; i < boxesToRemove.length; i++) { 
         boxesToRemove[i].parentNode.removeChild(boxesToRemove[i]);
     }
 }
 
-/* AI OU SECOND PLAYER
-for(let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function() {
-        secondPlayer = this.getAttribute('id');
-        for(let j = 0; j < buttons.length; j++) {
-            buttons[j].style.display = 'none';
-        }
-
-        backButton.classList.remove("hide");
-        
-        setTimeout(function() {
-            let container = document.querySelector("#container");
-            container.classList.remove("hide");
-        }, 500);
-    });
-}*/
 for(let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function() {
         secondPlayer = this.getAttribute('id');
@@ -227,7 +199,6 @@ for(let i = 0; i < buttons.length; i++) {
     });
 }
 
-// AI
 function computerPlay() {
     let cloneO = O.cloneNode(true);
     counter = 0;
